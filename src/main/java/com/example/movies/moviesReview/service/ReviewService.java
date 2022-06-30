@@ -1,5 +1,6 @@
 package com.example.movies.moviesReview.service;
 
+import com.example.movies.moviesReview.domain.Movie;
 import com.example.movies.moviesReview.domain.Review;
 import com.example.movies.moviesReview.repositories.MovieRepository;
 import com.example.movies.moviesReview.repositories.ReviewRepository;
@@ -20,15 +21,15 @@ public class ReviewService {
 
     public void addReview(Review review) {
         Review savedReview = reviewRepository.save(review);
-        //Long   movieId = review.getMovie().getMovieId();
-       // Movie movie  = movieRepository.findMovieById(review.getMovie().getMovieId());
-      //  Double existingMovieAvg = movie.getNoOfReviews();
-      //  Integer totalNumberOfReviews = reviewRepository.getNumberOfReviews(review.getMovie().getMovieId()) +1;
-       // Double calculatedMovieAvg = existingMovieAvg - ((review.getRating()-existingMovieAvg)/totalNumberOfReviews);
+        Long   movieId = review.getMovie().getMovieId();
+       Movie movie  = movieRepository.findMovieById(review.getMovie().getMovieId());
+       Double existingMovieAvg = movie.getNoOfReviews();
+        Integer totalNumberOfReviews = reviewRepository.getNumberOfReviews(review.getMovie().getMovieId()) +1;
+       Double calculatedMovieAvg = existingMovieAvg - ((review.getRating()-existingMovieAvg)/totalNumberOfReviews);
                // getNumberOfReviews(review.getMovie().getMovieId());
        // Double movieRatingAvg = review.getMovie().getNoOfReviews().doubleValue() +
       //                          ((review.getRating()-review.getMovie().getNoOfReviews().doubleValue())/reviewRepository.getNumberOfReviews(review.getMovie().getMovieId()));
-     //   reviewRepository.updateMovie(review.getMovie().getMovieId(),calculatedMovieAvg);
+        reviewRepository.updateMovie(review.getMovie().getMovieId(),calculatedMovieAvg);
         logger.info("saved the review for movie", review.getReviewId());
     }
 
