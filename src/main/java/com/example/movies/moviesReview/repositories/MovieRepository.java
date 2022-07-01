@@ -24,7 +24,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query("select m from Movie m where m.movieId= :id")
     Movie findMovieById(@Param(value="id") long id);
 
-    @Query(value = "update movie_table m set m.no_of_reviews = :noOfReviews where movie_id = :id",nativeQuery = true)
+    @Query(value = "update movie_table m set m.no_of_reviews = :noOfReviews where m.movie_id = :id",nativeQuery = true)
     void updateMovie(long id, Double noOfReviews);
 
 
