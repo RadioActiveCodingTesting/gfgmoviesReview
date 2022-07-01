@@ -3,6 +3,7 @@ package com.example.movies.moviesReview.repositories;
 import com.example.movies.moviesReview.domain.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,7 +22,10 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     Movie findByNameAndRating(String name,Double rating);
 
     @Query("select m from Movie m where m.movieId= :id")
-    Movie findMovieById(Long movieId);
+    Movie findMovieById(@Param(value="id") long id);
+
+    @Query(value = "update movie_table m set m.no_of_reviews = :noOfReviews where movie_id = :id",nativeQuery = true)
+    void updateMovie(long id, Double noOfReviews);
 
 
 
