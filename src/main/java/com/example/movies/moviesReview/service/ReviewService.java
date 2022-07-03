@@ -30,7 +30,7 @@ public class ReviewService {
                // getNumberOfReviews(review.getMovie().getMovieId());
        // Double movieRatingAvg = review.getMovie().getNoOfReviews().doubleValue() +
       //                          ((review.getRating()-review.getMovie().getNoOfReviews().doubleValue())/reviewRepository.getNumberOfReviews(review.getMovie().getMovieId()));
-        movieRepository.updateMovie(review.getMovie().getMovieId(),calculatedMovieAvg);
+         Movie movie1 = movieRepository.updateMovie(calculatedMovieAvg,review.getMovie().getMovieId());
         logger.info("saved the review for movie", review.getReviewId());
     }
 
